@@ -1,6 +1,7 @@
 import { Form } from "formik";
 import React from "react";
 import { useForm } from "react-hook-form";
+import DropdownHook from "../dropdown/DropdownHook";
 import InputHook from "../input/InputHook";
 import RadioHook from "../radio/RadioHook";
 
@@ -15,6 +16,7 @@ const RegisterHook = () => {
     handleSubmit,
     formState: { errors },
     control,
+    setValue,
   } = useForm();
   return (
     <form
@@ -89,6 +91,18 @@ const RegisterHook = () => {
           </div>
         </div>
       </div>
+
+      {/* DropDown */}
+      <div className="flex flex-col gap-3 mb-5">
+        <label className="cursor-pointer">Are you</label>
+        <DropdownHook
+          control={control}
+          name="job"
+          dropdownLabel="Select your job"
+          setValue={setValue}
+        ></DropdownHook>
+      </div>
+
       {/* button */}
       <button
         type="submit"
