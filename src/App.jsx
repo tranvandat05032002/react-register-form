@@ -1,5 +1,4 @@
-import RegisterHook from "./components/RegisterHook";
-
+import RegisterHook from "./components/form/RegisterHook.jsx";
 function App() {
   return (
     <div className="App">
