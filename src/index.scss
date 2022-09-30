@@ -20,3 +20,12 @@ body {
   @apply bg-blue-500;
   box-shadow: 0 0 0 2.5px white, 0 0 0 5px #2979ff;
 }
+
+.custom-checkbox input:checked + div .custom-checkbox-square {
+  background-color: #2979ff;
+}
+
+.custom-checkbox-square {
+  width: 20px;
+  height: 20px;
+}

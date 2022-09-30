@@ -1,6 +1,7 @@
 import { Form } from "formik";
 import React from "react";
 import { useForm } from "react-hook-form";
+import CheckboxHook from "../checkbox/CheckboxHook";
 import DropdownHook from "../dropdown/DropdownHook";
 import InputHook from "../input/InputHook";
 import RadioHook from "../radio/RadioHook";
@@ -101,6 +102,15 @@ const RegisterHook = () => {
           dropdownLabel="Select your job"
           setValue={setValue}
         ></DropdownHook>
+      </div>
+
+      {/* CheckboxHook */}
+      <div className="flex flex-col gap-3">
+        <CheckboxHook
+          name="term"
+          text="I accept the terms conditions"
+          control={control}
+        ></CheckboxHook>
       </div>
 
       {/* button */}
