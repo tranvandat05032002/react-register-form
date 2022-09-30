@@ -2,11 +2,10 @@ import React from "react";
 import { useController } from "react-hook-form";
 
 const RadioHook = ({ control, ...props }) => {
-  console.log(props);
   const { field } = useController({
     control,
     name: props.name,
-    defaultValue: "",
+    defaultValue: props.value,
   });
   return (
     <label className="cursor-pointer custom-radio">
@@ -16,7 +15,7 @@ const RadioHook = ({ control, ...props }) => {
         id={props.value}
         {...field}
         value={props.value}
-        defaultChecked={props.defaultChecked}
+        checked={props.checked}
       />
 
       <div className="w-ful h-full bg-white rounded-full"></div>

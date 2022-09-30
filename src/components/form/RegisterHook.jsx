@@ -54,7 +54,7 @@ const schemaValidation = Yup.object({
     ),
   term: Yup.boolean().required("Please accept the terms and conditions"),
 });
-
+//watch
 const RegisterHook = () => {
   // useForm
   const {
@@ -64,12 +64,15 @@ const RegisterHook = () => {
     setValue,
     getValues,
     reset,
+    watch,
   } = useForm({
-    // resolver: yupResolver(schemaValidation),
+    resolver: yupResolver(schemaValidation),
     mode: "onChange",
+    defaultValues: {
+      gender: "male",
+    },
   });
-  console.log(errors);
-  console.log(isSubmitting);
+  const watchGender = watch("gender");
   //onSubmit
   const onSubmitHandler = (values) => {
     if (!isValid) return;
@@ -81,7 +84,7 @@ const RegisterHook = () => {
           userName: "",
           email: "",
           password: "",
-          gender: "",
+          gender: "male",
           job: "",
           term: false,
         });
@@ -152,7 +155,7 @@ const RegisterHook = () => {
               name="gender"
               control={control}
               value="male"
-              defaultChecked={true}
+              checked={watchGender === "male"}
             ></RadioHook>
             <span>Male</span>
           </div>
@@ -161,6 +164,7 @@ const RegisterHook = () => {
               name="gender"
               control={control}
               value="female"
+              checked={watchGender === "female"}
             ></RadioHook>
             <span>Female</span>
           </div>
