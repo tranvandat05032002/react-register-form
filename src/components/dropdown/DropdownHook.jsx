@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useWatch } from "react-hook-form";
 import useClickOutside from "../../hooks/useClickOutside";
 
@@ -9,15 +9,16 @@ const DropdownHook = ({
   data,
   dropdownLabel = "Select your job",
 }) => {
-  console.log(data);
   const { show, setShow, nodeRef } = useClickOutside();
   const dropdownValue = useWatch({
     control,
     name: "job",
     defaultValue: "",
   });
-
   const [label, setLabel] = useState(dropdownLabel);
+  useEffect(() => {
+    if (dropdownValue === "") setLabel(dropdownLabel);
+  }, [dropdownValue]);
 
   const handleClickDropdownItem = (e) => {
     setValue(name, e.target.dataset.value);
