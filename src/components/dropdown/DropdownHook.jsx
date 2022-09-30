@@ -6,8 +6,10 @@ const DropdownHook = ({
   control,
   setValue,
   name,
+  data,
   dropdownLabel = "Select your job",
 }) => {
+  console.log(data);
   const { show, setShow, nodeRef } = useClickOutside();
   const dropdownValue = useWatch({
     control,
@@ -38,27 +40,16 @@ const DropdownHook = ({
           show ? "" : "opacity-0 invisible"
         }`}
       >
-        <div
-          onClick={handleClickDropdownItem}
-          data-value="Teacher"
-          className="px-3 py-2 cursor-pointer hover:bg-gray-200"
-        >
-          Teacher
-        </div>
-        <div
-          onClick={handleClickDropdownItem}
-          data-value="Developer"
-          className="px-3 py-2 cursor-pointer hover:bg-gray-200"
-        >
-          Developer
-        </div>
-        <div
-          onClick={handleClickDropdownItem}
-          data-value="Doctor"
-          className="px-3 py-2 cursor-pointer hover:bg-gray-200"
-        >
-          Doctor
-        </div>
+        {data.map((item) => (
+          <div
+            className="px-3 py-2 cursor-pointer hover:bg-gray-200"
+            data-value={item.value}
+            onClick={handleClickDropdownItem}
+            key={item.id}
+          >
+            {item.text}
+          </div>
+        ))}
       </div>
     </div>
   );

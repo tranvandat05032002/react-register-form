@@ -6,6 +6,31 @@ import DropdownHook from "../dropdown/DropdownHook";
 import InputHook from "../input/InputHook";
 import RadioHook from "../radio/RadioHook";
 
+// data dropdown
+
+const dropdownData = [
+  {
+    id: 1,
+    value: "teacher",
+    text: "Teacher",
+  },
+  {
+    id: 2,
+    value: "developer",
+    text: "Developer",
+  },
+  {
+    id: 3,
+    value: "doctor",
+    text: "Doctor",
+  },
+  {
+    id: 4,
+    value: "constructor",
+    text: "Constructor",
+  },
+];
+
 const RegisterHook = () => {
   //onSubmit
   const onSubmitHandler = (values) => {
@@ -101,6 +126,7 @@ const RegisterHook = () => {
           name="job"
           dropdownLabel="Select your job"
           setValue={setValue}
+          data={dropdownData}
         ></DropdownHook>
       </div>
 
