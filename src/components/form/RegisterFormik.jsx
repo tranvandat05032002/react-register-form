@@ -3,7 +3,7 @@ import React from "react";
 import * as Yup from "yup";
 import InputFormik from "../input/InputFormik";
 import RadioFormik from "../radio/RadioFormik";
-
+import DropdownFormik from "../dropdown/DropdownFormik";
 const dropdownData = [
   {
     id: 1,
@@ -38,8 +38,15 @@ const RegisterFormik = () => {
         job: "",
         term: false,
       }}
-      onSubmit={(values) => {
+      onSubmit={(values, actions) => {
+        console.log(actions);
         console.log(values);
+
+        setTimeout(() => {
+          alert(JSON.stringify(values, null, 2));
+          actions.setSubmitting(false);
+          actions.resetForm();
+        }, 2000);
       }}
     >
       {(formik) => {
@@ -89,11 +96,25 @@ const RegisterFormik = () => {
               </div>
             </div>
 
+            <DropdownFormik
+              labelText="Your job"
+              data={dropdownData}
+              name="job"
+              dropdownLabel="Select your job"
+              setValue={formik.setFieldValue}
+            ></DropdownFormik>
+
             <button
               type="submit"
-              className="w-full py-3 px-4 mt-5 font-normal text-white bg-blue-500 rounded-lg"
+              className={`w-full py-3 px-4 mt-5 font-normal text-white bg-blue-500 rounded-lg ${
+                formik.isSubmitting ? "opacity-50" : ""
+              }`}
             >
-              Submit
+              {formik.isSubmitting ? (
+                <div className="w-5 h-5 mx-auto border-2 border-t-0 border-white rounded-full border-t-transparent animate-spin transition-all"></div>
+              ) : (
+                "Submit"
+              )}
             </button>
           </form>
         );
