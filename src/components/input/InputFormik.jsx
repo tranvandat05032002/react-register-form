@@ -13,6 +13,10 @@ const InputFormik = ({ label, ...props }) => {
         {...field}
         {...props}
       />
+
+      {meta.touched && meta.error && (
+        <p className="text-sm text-red-500">{meta.error}</p>
+      )}
     </div>
   );
 };

@@ -10,6 +10,7 @@ const DropdownFormik = ({
   setValue,
 }) => {
   const [field, meta] = useField({ name });
+  console.log(meta);
   const [label, setLabel] = useState(dropdownLabel);
   const { show, setShow, nodeRef } = useClickOutside();
   const handleClickDropdownItem = (e) => {
@@ -32,7 +33,7 @@ const DropdownFormik = ({
         </div>
         <div
           className={`absolute top-full left-0 w-full rounded-lg bg-white ${
-            show ? "" : "opacity-0 visible"
+            show ? "" : "hidden"
           }`}
         >
           {data &&
@@ -49,6 +50,9 @@ const DropdownFormik = ({
             ))}
         </div>
       </div>
+      {meta.touched && meta.error && (
+        <p className="text-sm text-red-500">{meta.error}</p>
+      )}
     </div>
   );
 };

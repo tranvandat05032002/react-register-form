@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import InputFormik from "../input/InputFormik";
 import RadioFormik from "../radio/RadioFormik";
 import DropdownFormik from "../dropdown/DropdownFormik";
+import CheckboxFormik from "../checkbox/CheckboxFormik";
 const dropdownData = [
   {
     id: 1,
@@ -38,6 +39,26 @@ const RegisterFormik = () => {
         job: "",
         term: false,
       }}
+      validationSchema={Yup.object({
+        userName: Yup.string().required("Please enter your user name"),
+        passWord: Yup.string()
+          .min(8, "Your password must be at least 8 character or greater")
+          .required("Please enter your password")
+          .matches(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, {
+            message: "Your password must have least 1 character or 1 number",
+          }),
+        email: Yup.string()
+          .email("Must be valid email address")
+          .required("Please enter your email"),
+        gender: Yup.string().required("Please select your gender"),
+        job: Yup.string()
+          .required("Please select your job")
+          .oneOf(
+            ["teacher", "developer", "doctor", "constructor"],
+            "The job isn't in the selection"
+          ),
+        term: Yup.boolean().required("Please accept the terms and conditions"),
+      })}
       onSubmit={(values, actions) => {
         console.log(actions);
         console.log(values);
@@ -50,6 +71,7 @@ const RegisterFormik = () => {
       }}
     >
       {(formik) => {
+        const watchGender = formik.values.gender;
         return (
           <form
             onSubmit={formik.handleSubmit}
@@ -87,11 +109,13 @@ const RegisterFormik = () => {
                   name="gender"
                   value="male"
                   label="Male"
+                  checked={watchGender === "male"}
                 ></RadioFormik>
                 <RadioFormik
                   name="gender"
                   value="female"
                   label="Female"
+                  checked={watchGender === "female"}
                 ></RadioFormik>
               </div>
             </div>
@@ -103,6 +127,10 @@ const RegisterFormik = () => {
               dropdownLabel="Select your job"
               setValue={formik.setFieldValue}
             ></DropdownFormik>
+
+            <CheckboxFormik name="term">
+              I accept the term conditions
+            </CheckboxFormik>
 
             <button
               type="submit"
